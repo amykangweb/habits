@@ -10,16 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_08_215920) do
+ActiveRecord::Schema.define(version: 2018_07_19_004924) do
+
+  create_table "goals", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "status", default: "in progress"
+    t.text "desc"
+    t.integer "priority", default: 1
+    t.datetime "destroyed_at"
+    t.datetime "last_updated_at"
+  end
 
   create_table "habits", force: :cascade do |t|
     t.string "name"
     t.text "desc"
-    t.integer "priority"
-    t.string "status", default: "in progress"
     t.datetime "destroyed_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "last_updated_at"
+    t.integer "goals_id"
+    t.index ["goals_id"], name: "index_habits_on_goals_id"
   end
 
 end
